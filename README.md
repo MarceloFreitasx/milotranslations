@@ -23,12 +23,18 @@ Crie uma pequena aplicação que exiba uma lista dos recursos de tradução (i18
 
 Para cada elemento:
 
-[ X ] Exiba seu resource_id, seu updated_at e seu value. 
+[ X ] Exiba seu resource_id, seu updated_at e seu value.
+
 [ X ] Opções de filtrar a lista por language_id e também por module_id.
+
 [ X ] Campo de busca um terceiro filtro que se aplicaria ao value dos recursos de tradução, como busca textual do tipo "contém".
+
 [ X ] Belo design da aplicação e a usabilidade. Sabemos que o senhor Milo gosta de verde e se preocupa com o meio ambiente.
+
 [ X ] Scroll contínuo na lista
+
 [ X ] Procure pensar no comportamento offline
+
 [ X ] Feedback ao senhor Milo enquanto o software estiver processando alguma ação ou atualizando seus dados.
 
 ### Installation
