@@ -1,4 +1,5 @@
 import 'package:get/route_manager.dart';
+import 'package:milotranslations/src/splash/views/splash.view.dart';
 
 import 'app.routes.dart';
 
@@ -10,6 +11,6 @@ abstract class PagesRoutes {
 
   static final routes = [
     // GetPage(name: AppRoutes.MAIN, page: () => MainView()),
-    // GetPage(name: AppRoutes.SPLASH_SCREEN, page: () => SplashView()),
+    GetPage(name: AppRoutes.SPLASH_SCREEN, page: () => SplashView()),
   ];
 }
