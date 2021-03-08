@@ -6,6 +6,7 @@ import 'package:milotranslations/src/main/repositories/main.repository.dart';
 abstract class IMainStore extends GetxController {
   Future<bool> fetchLangaguesResource();
   ELoadingStatus get loadingStatus;
+  set loadingStatus(ELoadingStatus value);
   List<ResourcesModel> get listResources;
   set listResources(List<ResourcesModel> value);
   String get selectedLanguage;
@@ -39,6 +40,9 @@ class MainStore extends IMainStore {
 
   @override
   ELoadingStatus get loadingStatus => _loadingStatus.value;
+
+  @override
+  set loadingStatus(ELoadingStatus value) => _loadingStatus.value = value;
 
   @override
   List<ResourcesModel> get listResources => _listResources;

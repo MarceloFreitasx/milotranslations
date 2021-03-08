@@ -1,19 +1,29 @@
+import 'dart:convert';
+
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:milotranslations/core/enums/loading.enum.dart';
 import 'package:milotranslations/core/models/resources.model.dart';
+import 'package:milotranslations/core/services/localstorage.service.dart';
 import 'package:milotranslations/src/main/stores/main.store.dart';
 import 'package:milotranslations/src/main/views/filter.view.dart';
 
 class MainController {
   MainController(this._store) {
-    _store.fetchLangaguesResource().then((value) {
-      if (value) _buildFilter();
-    });
+    _storage = LocalStorage("resources");
+
+    if (_storage.read() != null)
+      _store.listResources =
+          List<ResourcesModel>.from(jsonDecode(_storage.read()).map((x) => ResourcesModel.fromJson(x)));
+    else
+      _store.fetchLangaguesResource().then((value) {
+        if (value) _buildFilter();
+      });
   }
 
   IMainStore _store;
+  LocalStorage _storage;
 
   bool get isLoading => _store.loadingStatus == ELoadingStatus.loading;
   List<ResourcesModel> get listResources => _store.listResources;
@@ -31,14 +41,12 @@ class MainController {
 
   _buildFilter() {
     _originalResources = List<ResourcesModel>.of(_store.listResources);
+    _storage.write(_originalResources.map((e) => e.toRawJson()).toList().toString());
 
     listLanguages =
         _store.listResources.expand((element) => [element.resource.languageValue]).toList().toSet().toList();
 
     listModules = _store.listResources.expand((element) => [element.resource.moduleValue]).toList().toSet().toList();
-
-    print(listLanguages);
-    print(listModules);
   }
 
   showFilter() {
@@ -55,6 +63,8 @@ class MainController {
   }
 
   doFilter() {
+    Get.back();
+    _store.loadingStatus = ELoadingStatus.loading;
     if (search.text.isNotEmpty) {
       listResources.removeWhere((element) => !removeDiacritics(element.resource.value.toLowerCase())
           .contains(removeDiacritics(search.text.toLowerCase())));
@@ -66,8 +76,7 @@ class MainController {
     if (!selectedModule.isNull) {
       listResources.removeWhere((element) => element.resource.moduleValue != selectedModule);
     }
-
-    Get.back();
+    _store.loadingStatus = ELoadingStatus.completed;
   }
 
   clearFilter() {
