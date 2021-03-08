@@ -54,6 +54,7 @@ flutter:
   # Assets section:
   assets:
     - assets/icons/
+    - assets/flags/
 
   # Fonts Section:
   fonts:

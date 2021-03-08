@@ -1,5 +1,8 @@
 import 'package:get/instance_manager.dart';
 import 'package:milotranslations/core/services/api.service.dart';
+import 'package:milotranslations/src/main/controllers/main.controller.dart';
+import 'package:milotranslations/src/main/repositories/main.repository.dart';
+import 'package:milotranslations/src/main/stores/main.store.dart';
 import 'package:milotranslations/src/splash/controllers/splash.controller.dart';
 import 'package:milotranslations/src/splash/stores/splash.store.dart';
 
@@ -13,10 +16,10 @@ class InitialBinding extends Bindings {
       return SplashController(Get.find());
     });
 
-    /*Get.lazyPut<MainController>(() {
+    Get.lazyPut<MainController>(() {
       Get.put(MainRepository(Get.find<ApiService>()));
       Get.put(MainStore(Get.find<MainRepository>()));
       return MainController(Get.find<MainStore>());
-    }); */
+    });
   }
 }

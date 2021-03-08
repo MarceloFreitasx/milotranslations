@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:milotranslations/core/styles/appassets.style.dart';
+
 class ResourcesModel {
   ResourcesModel({
     this.resource,
@@ -44,6 +46,41 @@ class Resource {
   factory Resource.fromRawJson(String str) => Resource.fromJson(json.decode(str));
 
   String toRawJson() => json.encode(toJson());
+
+  String get languageValue => languageIdValues.reverse[languageId];
+  String get moduleValue => moduleIdValues.reverse[moduleId];
+  String get flag {
+    switch (languageId) {
+      case LanguageId.CS:
+        return AppAssets.CZECH;
+      case LanguageId.DE:
+        return AppAssets.GERMANY;
+      case LanguageId.EN:
+        return AppAssets.UNITED_KINGDOM;
+      case LanguageId.EN_G:
+        return AppAssets.UNITED_STATES;
+      case LanguageId.ES:
+        return AppAssets.SPAIN;
+      case LanguageId.FR:
+        return AppAssets.FRANCE;
+      case LanguageId.HW:
+        return AppAssets.HAWAII;
+      case LanguageId.IT:
+        return AppAssets.ITALY;
+      case LanguageId.JA:
+        return AppAssets.JAPAN;
+      case LanguageId.PT:
+        return AppAssets.BRAZIL;
+      case LanguageId.RO:
+        return AppAssets.ROMANIA;
+      case LanguageId.RU:
+        return AppAssets.RUSSIA;
+      case LanguageId.TH:
+        return AppAssets.THAILAND;
+      default:
+        return AppAssets.UNITED_NATIONS;
+    }
+  }
 
   factory Resource.fromJson(Map<String, dynamic> json) => Resource(
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),

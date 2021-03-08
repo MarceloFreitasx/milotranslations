@@ -17,7 +17,7 @@ class SplashController {
 
   changeRoute() {
     Future.delayed(const Duration(seconds: 3), () {
-      // Get.offAndToNamed(AppRoutes.MAIN);
+      Get.offAndToNamed(AppRoutes.MAIN);
     });
   }
 }
