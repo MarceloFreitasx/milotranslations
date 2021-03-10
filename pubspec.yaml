@@ -55,6 +55,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/flags/
+    - test/mock/data/
 
   # Fonts Section:
   fonts:

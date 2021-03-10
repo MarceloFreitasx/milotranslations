@@ -13,10 +13,11 @@ class MainController {
   MainController(this._store) {
     _storage = LocalStorage("resources");
 
-    if (_storage.read() != null)
+    if (_storage.read() != null) {
       _store.listResources =
           List<ResourcesModel>.from(jsonDecode(_storage.read()).map((x) => ResourcesModel.fromJson(x)));
-    else
+      _buildFilter();
+    } else
       _store.fetchLangaguesResource().then((value) {
         if (value) _buildFilter();
       });

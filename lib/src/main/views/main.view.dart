@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:milotranslations/core/styles/styles.dart';
 import 'package:milotranslations/core/utils/extensions.util.dart';
 import 'package:milotranslations/src/main/controllers/main.controller.dart';
+import 'package:milotranslations/src/main/widgets/resourceitem.widget.dart';
 
 class MainView extends GetView<MainController> {
   const MainView({Key key}) : super(key: key);
@@ -33,34 +33,12 @@ class MainView extends GetView<MainController> {
               itemCount: controller.listResources.length,
               itemBuilder: (_, index) {
                 final item = controller.listResources[index];
-                return Card(
-                  margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Row(
-                      children: [
-                        Column(
-                          children: [
-                            SvgPicture.asset(item.resource.flag, width: 24, height: 24),
-                            Text(item.resource.languageValue.toUpperCase(), style: AppStyles.caption1),
-                          ],
-                        ),
-                        Container(width: 10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("${item.resource.value}", style: AppStyles.subtitle1),
-                              Container(height: 5),
-                              Text("ID: ${item.resource.resourceId}", style: AppStyles.body1),
-                              Container(height: 5),
-                              Text("Updated: ${item.resource.updatedAt.onlyDateHour}", style: AppStyles.caption1),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                return ResourceItem(
+                  flagIcon: item.resource.flag,
+                  language: item.resource.languageValue,
+                  resourceId: item.resource.resourceId,
+                  updatedAt: item.resource.updatedAt.onlyDateHour,
+                  value: item.resource.value,
                 );
               })),
     );
